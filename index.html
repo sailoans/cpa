@@ -1,31 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GitHub Repositories</title>
+    <title>GitHub Redirect</title>
 </head>
 <body>
-    <h1>GitHub Repositories</h1>
-    <p>Click the button below to visit a GitHub repository from Sri Lanka or Jamaica.</p>
-
-    <button id="githubLink">Visit GitHub Repository</button>
-
     <script>
-        // Define an array of GitHub repository links for Sri Lanka and Jamaica
-        const githubLinks = [
-            "https://github.com/username/repository-sri-lanka",
-            "https://github.com/username/repository-jamaica"
-            // Add more repository links as needed
-        ];
+        function redirectToLocation() {
+            // Get the user's country using a geolocation API or service.
+            // This is just a placeholder for demonstration purposes.
+            const userCountry = "Sri Lanka"; // Replace with actual user country detection logic.
 
-        // Function to open a random GitHub repository link
-        function openRandomGitHubLink() {
-            const randomIndex = Math.floor(Math.random() * githubLinks.length);
-            const randomLink = githubLinks[randomIndex];
-            window.open(randomLink, '_blank');
+            // Define the mapping of countries to GitHub repository links.
+            const countryToLink = {
+                "Sri Lanka": "https://github.com/yourusername/sri-lanka-repo",
+                "Jamaica": "https://github.com/yourusername/jamaica-repo",
+                // Add more countries as needed.
+            };
+
+            // Check if the user's country exists in the mapping.
+            if (countryToLink.hasOwnProperty(userCountry)) {
+                // Redirect the user to the appropriate GitHub link.
+                window.location.href = countryToLink[userCountry];
+            } else {
+                // Redirect to a default link or display an error message.
+                window.location.href = "https://github.com/yourusername/default-repo";
+            }
         }
 
-        // Add click event listener to the button
-        document.getElementById('githubLink').addEventListener('click', openRandomGitHubLink);
+        // Call the function when the page loads.
+        window.onload = redirectToLocation;
     </script>
 </body>
 </html>
