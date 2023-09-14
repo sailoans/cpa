@@ -17,21 +17,33 @@
                         // Add more countries and their URLs as needed
                     };
 
-                    // Redirect the user based on their country
-                    const redirectURL = redirections[country] || 'https://www.google.com';
-                    window.location.href = redirectURL;
+                    // Get the link element
+                    const countryLink = document.getElementById('countryLink');
+
+                    // Update the link's href based on the user's country
+                    if (redirections[country]) {
+                        countryLink.href = redirections[country];
+                    } else {
+                        countryLink.href = 'https://www.google.com'; // Fallback
+                    }
+
+                    // Make the link visible
+                    countryLink.style.display = 'block';
                 })
                 .catch(error => {
                     console.error('Error:', error);
                 });
         }
-
-        // Call the redirection function when the page loads
-        window.onload = redirectToCountry;
     </script>
 </head>
 <body>
+    <!-- Link for users to click -->
+    <a id="countryLink" style="display: none;">Click here to go to your country's link</a>
+
     <!-- This is the fallback content in case JavaScript is disabled or there's an issue with the API -->
     <p>If you are not redirected, <a href="https://www.google.com">click here</a>.</p>
+
+    <!-- Call the redirection function when the page loads -->
+    <script>redirectToCountry();</script>
 </body>
 </html>
