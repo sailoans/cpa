@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Repositories</title>
+</head>
+<body>
+    <h1>GitHub Repositories</h1>
+    <p>Click the button below to visit a GitHub repository from Sri Lanka or Jamaica.</p>
+
+    <button id="githubLink">Visit GitHub Repository</button>
+
+    <script>
+        // Define an array of GitHub repository links for Sri Lanka and Jamaica
+        const githubLinks = [
+            "https://github.com/username/repository-sri-lanka",
+            "https://github.com/username/repository-jamaica"
+            // Add more repository links as needed
+        ];
+
+        // Function to open a random GitHub repository link
+        function openRandomGitHubLink() {
+            const randomIndex = Math.floor(Math.random() * githubLinks.length);
+            const randomLink = githubLinks[randomIndex];
+            window.open(randomLink, '_blank');
+        }
+
+        // Add click event listener to the button
+        document.getElementById('githubLink').addEventListener('click', openRandomGitHubLink);
+    </script>
+</body>
+</html>
