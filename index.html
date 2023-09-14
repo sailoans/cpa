@@ -1,34 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GitHub Redirect</title>
-</head>
-<body>
+    <title>Country Redirect</title>
     <script>
-        function redirectToLocation() {
-            // Get the user's country using a geolocation API or service.
-            // This is just a placeholder for demonstration purposes.
-            const userCountry = "Sri Lanka"; // Replace with actual user country detection logic.
+        function redirectToCountry() {
+            // Get the user's country using a third-party API (e.g., freegeoip.app)
+            fetch('https://freegeoip.app/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const country = data.country_code;
 
-            // Define the mapping of countries to GitHub repository links.
-            const countryToLink = {
-                "Sri Lanka": "https://github.com/yourusername/sri-lanka-repo",
-                "Jamaica": "https://github.com/yourusername/jamaica-repo",
-                // Add more countries as needed.
-            };
+                    // Define the redirection URLs for different countries
+                    const redirections = {
+                        'LK': 'https://singingfiles.com/show.php?l=0&u=8436&id=54770', // Sri Lanka
+                        'JM': 'https://singingfiles.com/show.php?l=0&u=8436&id=54622', // Jamaica
+                        // Add more countries and their URLs as needed
+                    };
 
-            // Check if the user's country exists in the mapping.
-            if (countryToLink.hasOwnProperty(userCountry)) {
-                // Redirect the user to the appropriate GitHub link.
-                window.location.href = countryToLink[userCountry];
-            } else {
-                // Redirect to a default link or display an error message.
-                window.location.href = "https://github.com/yourusername/default-repo";
-            }
+                    // Redirect the user based on their country
+                    const redirectURL = redirections[country] || 'https://www.google.com';
+                    window.location.href = redirectURL;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
         }
 
-        // Call the function when the page loads.
-        window.onload = redirectToLocation;
+        // Call the redirection function when the page loads
+        window.onload = redirectToCountry;
     </script>
+</head>
+<body>
+    <!-- This is the fallback content in case JavaScript is disabled or there's an issue with the API -->
+    <p>If you are not redirected, <a href="https://www.google.com">click here</a>.</p>
 </body>
 </html>
